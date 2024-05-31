@@ -1,0 +1,88 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <style>
+        .container {
+            margin-top: 5rem;
+        }
+
+        .empty-cart {
+            text-align: center;
+            margin-top: 5rem;
+        }
+
+        .cart-item {
+            margin-bottom: 2rem;
+        }
+
+        .cart-image {
+            width: 100%;
+            max-width: 150px;
+            border-radius: 8px;
+        }
+
+        .cart-details {
+            padding: 1rem;
+        }
+
+        .total {
+            font-weight: bold;
+        }
+
+        .proceed-to-pay {
+            margin-top: 1rem;
+        }
+    </style>
+
+    <div class="container">
+        {% if not cart_items %}
+            <div class="empty-cart">
+                <h1>Your Cart is empty</h1>
+            </div>
+        {% else %}
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h3 class="mb-4">Shopping Cart</h3>
+                    {% for cart_item in cart_items %}
+                        <div class="card cart-item">
+                            <div class="row g-0">
+                                <div class="col-md-2">
+                                    <img src="{{ cart_item.product.image.url }}" class="img-fluid rounded-start cart-image" alt="{{ cart_item.product.name }}">
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="card-body cart-details">
+                                        <h5 class="card-title">{{ cart_item.product.name }}</h5>
+                                        {% if cart_item.product.is_sale %}
+                                            <p class="card-text">Price: Rs {{ cart_item.product.sale_price }}</p>
+                                        {% else %}
+                                            <p class="card-text">Price: Rs {{ cart_item.product.price }}</p>
+                                        {% endif %}
+                                        <p class="card-text">Qty: {{ cart_item.quantity }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card-body cart-details">
+                                        <p class="card-text total">Total: Rs {{ cart_item.sub_total }}</p>
+                                        <a href="{% url 'cart:full_remove' cart_item.product.id %}" class="btn btn-danger">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="card cart-item mb-4">
+                        <div class="card-body cart-details">
+                            <p class="card-text total">Cart Total: Rs {{ total }}</p>
+                        </div>
+                    </div>
+
+                    <div class="card proceed-to-pay">
+                        <div class="card-body">
+                            <a href="{% url 'cart:create_order' cart_item.product.id %}" class="btn btn-warning btn-block">Proceed to Pay</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

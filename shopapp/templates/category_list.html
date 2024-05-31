@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+
+    <!-- Add this link to include FontAwesome (make sure to include it in your project) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Add this style in the head section of your category.html template -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        nav {
+            background-color: #ecf0f1;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 10px; /* Smaller margin */
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000000;
+            font-size: 14px; /* Smaller font size */
+            padding: 8px 12px; /* Adjust padding */
+            border: 1px solid hwb(0 0% 100%);
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #000000;
+            color: #fff;
+        }
+
+        section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #000000;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li {
+            font-size: 18px;
+            margin: 5px;
+        }
+
+        .category-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .category-button i {
+            font-size: 24px;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SHOPSY</h1>
+</header>
+<script>
+    function showCategoryProducts(category) {
+        window.location.href = `/categories/${category}/`;
+    }
+</script>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        
+    </ul>
+</nav>
+<section>
+    <h2></h2>
+    <ul>
+        <li class="category-button">
+            <a href="{% url 'category_products' 'fashion' %}">
+                <i class="fas fa-tshirt"></i>
+            </a>
+        </li>
+        <li class="category-button">
+            <a href="{% url 'category_products' 'smartphone' %}">
+                <i class="fas fa-mobile-alt"></i>
+            </a>
+        </li>
+        <li class="category-button">
+            <a href="{% url 'category_products' 'tws' %}">
+                <i class="fas fa-headphones"></i>
+
+            </a>
+        </li>
+    </ul>
+</section>
+
+
+
+
+<footer>
+    <p>&copy; 2023 Shopsy - Your E-Commerce Site. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+ 

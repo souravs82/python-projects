@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Add this style in the head section of your login.html template -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #ecf0f1;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #bdc3c7;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-right: 10px; /* Smaller margin */
+        }
+
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000000;
+            font-size: 14px; /* Smaller font size */
+            padding: 8px 12px; /* Adjust padding */
+            border: 1px solid hwb(0 0% 100%);
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #000000;
+            color: #fff;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #000000;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px 15px;
+            border: 2px solid hwb(0 0% 100%);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+            margin-top: 10px;
+            display: block;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>SHOPSY</h1>
+</header>
+<nav>
+    <ul>
+        <li><a href="{% url 'home' %}">HOME</a></li>
+        <li><a href="{% url 'category_list' %}">CATEGORY</a></li>
+        <li><a href="{% url 'register_cus' %}">SIGNUP</a></li>
+    </ul>
+</nav>
+
+
+<h2>SIGNIN</h2>
+
+{% if login_failed %}
+    <p style="color: red;">Login failed. Please check your username and password.</p>
+{% endif %}
+
+<form method="POST" action="{% url 'login_page' %}">
+    {% csrf_token %}
+    Username: <input type="text" name="uname"><br>
+    Password: <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+    <i>Forgot Password?</i>
+</form>
+
+
+</body>
+</html>

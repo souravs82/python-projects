@@ -1,0 +1,26 @@
+<!-- category_products.html -->
+{% extends 'index.html' %}
+
+{% block content %}
+    <h2>{{ category }} Products</h2>
+
+    <ul>
+        {% for product in products %}
+            <li>
+                <h3>{{ product.name }}</h3>
+                <p>Price: ₹{{ product.price }}</p> 
+                <img src="{{ product.image.url }}" alt="{{ product.name }} image">
+                <!-- Add other product details as needed -->
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div>
+        <h3>Other Categories</h3>
+        <ul>
+            {% for cat in categories %}
+                <li><a href="{% url 'category_products' category=cat.name %}">{{ cat.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

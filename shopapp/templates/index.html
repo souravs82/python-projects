@@ -1,0 +1,222 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopsy - Your E-Commerce Destination</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+    background-color: #ecf0f1;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 2px solid #bdc3c7;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Adjust alignment */
+    align-items: center;
+}
+
+nav ul li {
+    margin-right: 10px;
+}
+
+nav ul li:last-child {
+    margin-right: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    font-size: 14px;
+    padding: 8px 12px;
+    border: 1px solid hwb(0 0% 100%);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #000000;
+    color: #fff;
+}
+
+nav ul li.welcome-message a {
+    color: #000000;
+    font-size: 14px;
+    border: none;
+    padding: 0;
+}
+
+nav ul li.welcome-message a:hover {
+    background-color: transparent;
+    color: #000000;
+}
+
+        .welcome-section {
+            background-color: #ffffff;
+            color: #333; /* Adjust text color */
+            padding: 65px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            border-radius: 8px;
+
+            text-align: left;
+        }
+
+        .welcome-section img {
+            max-width: 50%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        a {
+                text-decoration: none; /* Remove underlines */
+                  color: #000000;
+                 transition: color 0.3s ease;
+    }
+
+a:hover {
+    color: #2980b9;
+}
+
+
+        .products-section {
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        /* Add or update these styles in your existing CSS */
+a.button {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: hsl(0, 0%, 0%);
+    border: 2px solid hwb(0 0% 100%);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+a.button:hover {
+    background-color: hsl(0, 0%, 0%);
+    color: #ffffff;
+    border-color: hsl(0, 0%, 0%);
+}
+
+
+        footer {
+            background-color: #000; /* Change to black */
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SHOPSY</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">HOME</a></li>
+            <li><a href="{% url 'category_list' %}">CATEGORY</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="#">Welcome {{ user.username }}</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'register_cus' %}">SIGNUP</a></li>
+                <li><a href="{% url 'login_page' %}">SIGNIN</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    
+
+    <div class="welcome-section">
+        <h2>WELCOME TO SHOPSY</h2>
+        <p>Discover the joy of seamless online shopping at Shopsy, your premier destination for a diverse range of quality products. From trending fashion to the latest gadgets, we've got it all. Explore our curated collection, shop with confidence, and make every purchase an exciting experience. Happy shopping!</p>
+        <p></p>
+    </div>
+
+    <section class="products-section">
+        <h2> Products</h2>
+        <div class="product-grid">
+            {% for product in products %}
+                <div class="product">
+                    <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }} image">
+                    <h3>{{ product.name }}</h3>
+                    <p>Price: ₹{{ product.price }}</p>
+                    <!-- Add other product details as needed -->
+                    <a href="#" class="button">Buy Now</a>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </section>
+
+    <footer>
+        <p>Contact Us:</p>
+        <p>Email: info@shopsy.com</p>
+        <p>Phone: +1 (555) 123-4567</p>
+        <p>&copy; 2023 Shopsy - Your E-Commerce Destination. All rights reserved.</p>
+    </footer>
+</body>
+</html>

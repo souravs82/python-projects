@@ -1,0 +1,51 @@
+<!-- shopapp/templates/product_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <header>
+        <h1>Products</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'category_list' %}">Categories</a></li>
+
+    </nav>
+
+    <section>
+        <h2>All Products</h2>
+        <ul>
+            {% for product in products %}
+                <li><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></li>
+            {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Shopsy - Your E-Commerce Site. All rights reserved.</p>
+    </footer>
+</body>
+</html>
